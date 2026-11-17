@@ -1,0 +1,26 @@
+[package]
+name = "will-remote"
+version = "0.1.0"
+description = "Remote desktop over the internet"
+authors = ["WiliamMP"]
+edition = "2024"
+
+[lib]
+# the _lib suffix keeps the lib name apart from the bin name (a Windows issue, cargo#8519)
+name = "will_remote_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+enigo = "0.6.1"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
